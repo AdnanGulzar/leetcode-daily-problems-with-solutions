@@ -1,25 +1,26 @@
-// 3794. Reverse String Prefix
-// Reverse the first k characters of s and return the resulting string.
-// Example 1:
-
-// Input: s = "abcd", k = 2
-
-// Output: "bacd"
-
-// Explanation:​​​​​​​
-
-// The first k = 2 characters "ab" are reversed to "ba". The final resulting string is "bacd".
+// 3194. Minimum Average of Smallest and Largest Elements
+// You have an array of floating point numbers averages which is initially empty. You are given an array nums of n integers where n is even.
+// You repeat the following procedure n / 2 times:
+// Remove the smallest element, minElement, and the largest element maxElement, from nums.
+// Add (minElement + maxElement) / 2 to averages.
+// Return the minimum element in averages.
 
 // solution
 
 /**
- * @param {string} s
- * @param {number} k
- * @return {string}
+ * @param {number[]} nums
+ * @return {number}
  */
-var reversePrefix = function(s, k) {
-    let res=s.slice(0,k).split("").reverse().join("")
-    let secondPart=s.slice(k,s.length)
-    return  res+secondPart
+var minimumAverage = function(nums) {
+    let averages=[]
+    let length=nums.length
+    let sortedNum=nums.sort((a,b)=>a-b)
+    for(let i=0;i<length/2;i++){
+        let min =sortedNum[i];
+        let max=sortedNum[length-1-i]
+        averages.push((min+max)/2)        
+    }
+
+    return Math.min(...averages)
     
 };
