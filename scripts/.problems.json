@@ -1,0 +1,146 @@
+[
+  {
+    "id": 1,
+    "title": "Two Sum",
+    "difficulty": "easy",
+    "language": "js",
+    "description": "Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target. You may assume that each input has exactly one solution, and you may not use the same element twice.",
+    "solution": "/**\n * @param {number[]} nums\n * @param {number} target\n * @return {number[]}\n */\nvar twoSum = function(nums, target) {\n    const map = new Map();\n    for (let i = 0; i < nums.length; i++) {\n        const complement = target - nums[i];\n        if (map.has(complement)) {\n            return [map.get(complement), i];\n        }\n        map.set(nums[i], i);\n    }\n    return [];\n};"
+  },
+  {
+    "id": 9,
+    "title": "Palindrome Number",
+    "difficulty": "easy",
+    "language": "py",
+    "description": "",
+    "solution": "class Solution:\n    def isPalindrome(self, x: int) -> bool:\n        if x < 0:\n            return False\n        return str(x) == str(x)[::-1]"
+  },
+  {
+    "id": 13,
+    "title": "Roman to Integer",
+    "difficulty": "easy",
+    "language": "js",
+    "description": "Given a roman numeral, convert it to an integer.",
+    "solution": "/**\n * @param {string} s\n * @return {number}\n */\nvar romanToInt = function(s) {\n    const values = { I: 1, V: 5, X: 10, L: 50, C: 100, D: 500, M: 1000 };\n    let total = 0;\n    for (let i = 0; i < s.length; i++) {\n        const value = values[s[i]];\n        if (i + 1 < s.length && value < values[s[i + 1]]) {\n            total -= value;\n        } else {\n            total += value;\n        }\n    }\n    return total;\n};"
+  },
+  {
+    "id": 20,
+    "title": "Valid Parentheses",
+    "difficulty": "easy",
+    "language": "py",
+    "description": "",
+    "solution": "class Solution:\n    def isValid(self, s: str) -> bool:\n        pairs = {')': '(', ']': '[', '}': '{'}\n        stack = []\n        for ch in s:\n            if ch in pairs:\n                if not stack or stack.pop() != pairs[ch]:\n                    return False\n            else:\n                stack.append(ch)\n        return not stack"
+  },
+  {
+    "id": 21,
+    "title": "Merge Two Sorted Lists",
+    "difficulty": "easy",
+    "language": "js",
+    "description": "You are given the heads of two sorted linked lists list1 and list2. Merge the two lists into one sorted list by splicing together the nodes of the first two lists. Return the head of the merged linked list.",
+    "solution": "/**\n * @param {ListNode} list1\n * @param {ListNode} list2\n * @return {ListNode}\n */\nvar mergeTwoLists = function(list1, list2) {\n    const dummy = new ListNode(0);\n    let current = dummy;\n    while (list1 && list2) {\n        if (list1.val <= list2.val) {\n            current.next = list1;\n            list1 = list1.next;\n        } else {\n            current.next = list2;\n            list2 = list2.next;\n        }\n        current = current.next;\n    }\n    current.next = list1 || list2;\n    return dummy.next;\n};"
+  },
+  {
+    "id": 121,
+    "title": "Best Time to Buy and Sell Stock",
+    "difficulty": "easy",
+    "language": "js",
+    "description": "You are given an array prices where prices[i] is the price of a given stock on the ith day. Maximize your profit by choosing a single day to buy and a different later day to sell. Return the maximum profit, or 0 if no profit is possible.",
+    "solution": "/**\n * @param {number[]} prices\n * @return {number}\n */\nvar maxProfit = function(prices) {\n    let minPrice = Infinity;\n    let best = 0;\n    for (let i = 0; i < prices.length; i++) {\n        if (prices[i] < minPrice) {\n            minPrice = prices[i];\n        } else if (prices[i] - minPrice > best) {\n            best = prices[i] - minPrice;\n        }\n    }\n    return best;\n};"
+  },
+  {
+    "id": 217,
+    "title": "Contains Duplicate",
+    "difficulty": "easy",
+    "language": "py",
+    "description": "",
+    "solution": "class Solution:\n    def containsDuplicate(self, nums: List[int]) -> bool:\n        return len(nums) != len(set(nums))"
+  },
+  {
+    "id": 53,
+    "title": "Maximum Subarray",
+    "difficulty": "easy",
+    "language": "js",
+    "description": "Given an integer array nums, find the subarray with the largest sum, and return its sum.",
+    "solution": "/**\n * @param {number[]} nums\n * @return {number}\n */\nvar maxSubArray = function(nums) {\n    let maxSum = nums[0];\n    let currentSum = nums[0];\n    for (let i = 1; i < nums.length; i++) {\n        currentSum = Math.max(nums[i], currentSum + nums[i]);\n        maxSum = Math.max(maxSum, currentSum);\n    }\n    return maxSum;\n};"
+  },
+  {
+    "id": 136,
+    "title": "Single Number",
+    "difficulty": "easy",
+    "language": "py",
+    "description": "",
+    "solution": "class Solution:\n    def singleNumber(self, nums: List[int]) -> int:\n        result = 0\n        for num in nums:\n            result ^= num\n        return result"
+  },
+  {
+    "id": 70,
+    "title": "Climbing Stairs",
+    "difficulty": "easy",
+    "language": "js",
+    "description": "You are climbing a staircase. It takes n steps to reach the top. Each time you can either climb 1 or 2 steps. In how many distinct ways can you climb to the top?",
+    "solution": "/**\n * @param {number} n\n * @return {number}\n */\nvar climbStairs = function(n) {\n    if (n <= 2) return n;\n    let prev = 1, curr = 2;\n    for (let i = 3; i <= n; i++) {\n        const next = prev + curr;\n        prev = curr;\n        curr = next;\n    }\n    return curr;\n};"
+  },
+  {
+    "id": 2,
+    "title": "Add Two Numbers",
+    "difficulty": "medium",
+    "language": "js",
+    "description": "You are given two non-empty linked lists representing two non-negative integers, with digits stored in reverse order. Add the two numbers and return the sum as a linked list.",
+    "solution": "/**\n * Definition for singly-linked list.\n * function ListNode(val, next) {\n *     this.val = (val===undefined ? 0 : val)\n *     this.next = (next===undefined ? null : next)\n * }\n */\n/**\n * @param {ListNode} l1\n * @param {ListNode} l2\n * @return {ListNode}\n */\nvar addTwoNumbers = function(l1, l2) {\n    const dummy = new ListNode(0);\n    let current = dummy;\n    let carry = 0;\n    while (l1 || l2 || carry) {\n        const sum = (l1 ? l1.val : 0) + (l2 ? l2.val : 0) + carry;\n        carry = Math.floor(sum / 10);\n        current.next = new ListNode(sum % 10);\n        current = current.next;\n        if (l1) l1 = l1.next;\n        if (l2) l2 = l2.next;\n    }\n    return dummy.next;\n};"
+  },
+  {
+    "id": 3,
+    "title": "Longest Substring Without Repeating Characters",
+    "difficulty": "medium",
+    "language": "py",
+    "description": "",
+    "solution": "class Solution:\n    def lengthOfLongestSubstring(self, s: str) -> int:\n        seen = {}\n        start = 0\n        longest = 0\n        for end, ch in enumerate(s):\n            if ch in seen and seen[ch] >= start:\n                start = seen[ch] + 1\n            seen[ch] = end\n            longest = max(longest, end - start + 1)\n        return longest"
+  },
+  {
+    "id": 15,
+    "title": "3Sum",
+    "difficulty": "medium",
+    "language": "js",
+    "description": "Given an integer array nums, return all the triplets [nums[i], nums[j], nums[k]] such that i != j, i != k, j != k, and nums[i] + nums[j] + nums[k] == 0. The solution set must not contain duplicate triplets.",
+    "solution": "/**\n * @param {number[]} nums\n * @return {number[][]}\n */\nvar threeSum = function(nums) {\n    nums.sort((a, b) => a - b);\n    const result = [];\n    for (let i = 0; i < nums.length - 2; i++) {\n        if (i > 0 && nums[i] === nums[i - 1]) continue;\n        let left = i + 1;\n        let right = nums.length - 1;\n        while (left < right) {\n            const sum = nums[i] + nums[left] + nums[right];\n            if (sum === 0) {\n                result.push([nums[i], nums[left], nums[right]]);\n                while (left < right && nums[left] === nums[left + 1]) left++;\n                while (left < right && nums[right] === nums[right - 1]) right--;\n                left++;\n                right--;\n            } else if (sum < 0) {\n                left++;\n            } else {\n                right--;\n            }\n        }\n    }\n    return result;\n};"
+  },
+  {
+    "id": 49,
+    "title": "Group Anagrams",
+    "difficulty": "medium",
+    "language": "py",
+    "description": "",
+    "solution": "class Solution:\n    def groupAnagrams(self, strs: List[str]) -> List[List[str]]:\n        groups = {}\n        for s in strs:\n            key = ''.join(sorted(s))\n            groups.setdefault(key, []).append(s)\n        return list(groups.values())"
+  },
+  {
+    "id": 238,
+    "title": "Product of Array Except Self",
+    "difficulty": "medium",
+    "language": "js",
+    "description": "Given an integer array nums, return an array answer such that answer[i] is equal to the product of all the elements of nums except nums[i], without using the division operation.",
+    "solution": "/**\n * @param {number[]} nums\n * @return {number[]}\n */\nvar productExceptSelf = function(nums) {\n    const n = nums.length;\n    const result = new Array(n).fill(1);\n    let prefix = 1;\n    for (let i = 0; i < n; i++) {\n        result[i] = prefix;\n        prefix *= nums[i];\n    }\n    let suffix = 1;\n    for (let i = n - 1; i >= 0; i--) {\n        result[i] *= suffix;\n        suffix *= nums[i];\n    }\n    return result;\n};"
+  },
+  {
+    "id": 4,
+    "title": "Median of Two Sorted Arrays",
+    "difficulty": "hard",
+    "language": "py",
+    "description": "",
+    "solution": "class Solution:\n    def findMedianSortedArrays(self, nums1: List[int], nums2: List[int]) -> float:\n        merged = sorted(nums1 + nums2)\n        n = len(merged)\n        mid = n // 2\n        if n % 2 == 0:\n            return (merged[mid - 1] + merged[mid]) / 2\n        return merged[mid]"
+  },
+  {
+    "id": 42,
+    "title": "Trapping Rain Water",
+    "difficulty": "hard",
+    "language": "js",
+    "description": "Given n non-negative integers representing an elevation map where the width of each bar is 1, compute how much water it can trap after raining.",
+    "solution": "/**\n * @param {number[]} height\n * @return {number}\n */\nvar trap = function(height) {\n    let left = 0, right = height.length - 1;\n    let leftMax = 0, rightMax = 0;\n    let water = 0;\n    while (left < right) {\n        if (height[left] < height[right]) {\n            leftMax = Math.max(leftMax, height[left]);\n            water += leftMax - height[left];\n            left++;\n        } else {\n            rightMax = Math.max(rightMax, height[right]);\n            water += rightMax - height[right];\n            right--;\n        }\n    }\n    return water;\n};"
+  },
+  {
+    "id": 23,
+    "title": "Merge k Sorted Lists",
+    "difficulty": "hard",
+    "language": "py",
+    "description": "",
+    "solution": "import heapq\n\nclass Solution:\n    def mergeKLists(self, lists: List[Optional[ListNode]]) -> Optional[ListNode]:\n        heap = []\n        for i, node in enumerate(lists):\n            if node:\n                heapq.heappush(heap, (node.val, i, node))\n        dummy = ListNode()\n        current = dummy\n        while heap:\n            val, i, node = heapq.heappop(heap)\n            current.next = node\n            current = current.next\n            if node.next:\n                heapq.heappush(heap, (node.next.val, i, node.next))\n        return dummy.next"
+  }
+]
